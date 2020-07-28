@@ -18,20 +18,25 @@ chmod 600 ~/.ssh/id_rsa
 chmod 644 ~/.ssh/id_rsa.pub
 
 echo "Setting git config..."
-git --version
 name=$(whoami)
 email=$(az account show --query "user.name" --output tsv)
-echo "===== Git global configurations ====="
-git config --global user.email $email
-git config --global user.name $name
-git config --global push.default simple
-git config --global pull.rebase false
-git config --global --list
 
 if [ -z $PACROY_ALIAS ]; then
     echo "Installing alias..."
     curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/install_alias.sh | bash -
 else
     echo "Updating alias..."
-    update_alias
+    curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/alias.sh -o ~/clouddrive/alias.sh
+    source ~/clouddrive/alias.sh
 fi
+
+echo "===== Git configurations ====="
+git --version
+git config --global user.email $email
+git config --global user.name $name
+git config --global push.default simple
+git config --global pull.rebase false
+git config --global --list
+echo "===== Your SSH Public Key ====="
+cat ~/.ssh/id_rsa.pub
+echo "==============================="
