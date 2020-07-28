@@ -32,5 +32,6 @@ if [ ! -e ~/alias.sh ]; then
     echo "Installing alias..."
     curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/install_alias.sh | bash -
 else
+    echo "Updating alias..."
     update_alias
 fi
