@@ -9,6 +9,7 @@ ln -sf /usr/csuser/clouddrive/bin ~/bin
 
 if [ ! -d ~/clouddrive/.ssh ] || [ ! -e ~/clouddrive/.ssh/id_rsa ] || [ ! -e ~/clouddrive/.ssh/id_rsa.pub ]; then
     echo "Generate SSH keypair..."
+    if [ ! -d ~/clouddrive/.ssh ]; then mkdir ~/clouddrive/.ssh; fi
     ssh-keygen -t rsa -b 4096 -C "$(whoami)@cloudshell.$(hostname)" -f ~/clouddrive/.ssh/id_rsa -N ""
 fi
 echo "Copying SSH keypair..."
