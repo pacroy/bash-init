@@ -19,8 +19,9 @@ chmod 644 ~/.ssh/id_rsa.pub
 
 echo "Setting git config..."
 git --version
-while [ -z $name ]; do read -p "Your name: " name; done
-while [ -z $email ]; do read -p "Your email: " email; done
+name=$(whoami)
+email=$(az account show --query "user.name" --output tsv)
+echo "===== Git global configurations ====="
 git config --global user.email $email
 git config --global user.name $name
 git config --global push.default simple
