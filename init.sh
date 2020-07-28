@@ -23,4 +23,5 @@ while [ -z $email ]; do read -p "Your email: " email; done;
 git config --global user.email $email
 git config --global user.name $name
 git config --global push.default simple
+git config --global pull.rebase false
 git config --global --list
