@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-echo "Creating directories..."
-if [ ! -d ~/clouddrive/dev ]; then mkdir ~/clouddrive/dev; fi
-ln -sf /usr/csuser/clouddrive/dev ~/dev
-if [ ! -d ~/clouddrive/bin ]; then mkdir ~/clouddrive/bin; fi
-ln -sf /usr/csuser/clouddrive/bin ~/bin
+echo "Setting up directories..."
+if [ ! -d ~/clouddrive/dev ]; then mkdir ~/clouddrive/dev; else rm ~/dev; fi
+ln -s /usr/csuser/clouddrive/dev ~/dev
+if [ ! -d ~/clouddrive/bin ]; then mkdir ~/clouddrive/bin; else rm ~/bin; fi
+ln -s /usr/csuser/clouddrive/bin ~/bin
 
 if [ ! -d ~/clouddrive/.ssh ] || [ ! -e ~/clouddrive/.ssh/id_rsa ] || [ ! -e ~/clouddrive/.ssh/id_rsa.pub ]; then
     echo "Generate SSH keypair..."
