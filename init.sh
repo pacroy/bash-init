@@ -28,7 +28,7 @@ git config --global push.default simple
 git config --global pull.rebase false
 git config --global --list
 
-if [ ! -e ~/clouddrive/alias.sh ]; then
+if [ -z $PACROY_ALIAS ]; then
     echo "Installing alias..."
     curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/install_alias.sh | bash -
 else
