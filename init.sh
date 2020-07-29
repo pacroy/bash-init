@@ -2,40 +2,37 @@
 set -e
 
 echo "Setting up directories..."
-if [ ! -d ~/clouddrive/dev ]; then mkdir ~/clouddrive/dev; else rm ~/dev; fi
-ln -s /usr/csuser/clouddrive/dev ~/dev
-if [ ! -d ~/clouddrive/bin ]; then mkdir ~/clouddrive/bin; else rm ~/bin; fi
-ln -s /usr/csuser/clouddrive/bin ~/bin
+if [ ! -d ~/dev ]; then mkdir ~/dev; fi
+if [ ! -d ~/bin ]; then mkdir ~/bin; fi
 
-if [ ! -d ~/clouddrive/.ssh ] || [ ! -e ~/clouddrive/.ssh/id_rsa ] || [ ! -e ~/clouddrive/.ssh/id_rsa.pub ]; then
+if [ ! -d ~/.ssh ] || [ ! -e ~/.ssh/id_rsa ] || [ ! -e ~/.ssh/id_rsa.pub ]; then
     echo "Generate SSH keypair..."
-    if [ ! -d ~/clouddrive/.ssh ]; then mkdir ~/clouddrive/.ssh; fi
-    ssh-keygen -t rsa -b 4096 -C "$(whoami)@cloudshell.$(hostname)" -f ~/clouddrive/.ssh/id_rsa -N ""
+    if [ ! -d ~/.ssh ]; then mkdir ~/.ssh; fi
+    ssh-keygen -t rsa -b 4096 -C "$(whoami)@cloudshell.$(hostname)" -f ~/.ssh/id_rsa -N ""
 fi
-echo "Copying SSH keypair..."
-cp --recursive --update --force ~/clouddrive/.ssh ~/
 chmod 600 ~/.ssh/id_rsa
 chmod 644 ~/.ssh/id_rsa.pub
 
 echo "Setting git config..."
 name=$(whoami)
 email=$(az account show --query "user.name" --output tsv)
+git config --global user.email $email
+git config --global user.name $name
+git config --global push.default simple
+git config --global pull.rebase false
 
 if [ -z $PACROY_ALIAS ]; then
     echo "Installing alias..."
     curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/install_alias.sh | bash -
 else
     echo "Updating alias..."
-    curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/alias.sh -o ~/clouddrive/alias.sh
-    source ~/clouddrive/alias.sh
+    update_alias
+    # curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/alias.sh -o ~/alias.sh
+    # source ~/alias.sh
 fi
 
 echo "===== Git configurations ====="
 git --version
-git config --global user.email $email
-git config --global user.name $name
-git config --global push.default simple
-git config --global pull.rebase false
 git config --global --list
 echo "===== Your SSH Public Key ====="
 cat ~/.ssh/id_rsa.pub
