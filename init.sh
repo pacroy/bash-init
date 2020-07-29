@@ -26,9 +26,7 @@ if [ -z $PACROY_ALIAS ]; then
     curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/install_alias.sh | bash -
 else
     echo "Updating alias..."
-    update_alias
-    # curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/alias.sh -o ~/alias.sh
-    # source ~/alias.sh
+    bash ~/alias.sh update_alias
 fi
 
 echo "===== Git configurations ====="
