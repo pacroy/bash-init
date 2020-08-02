@@ -58,12 +58,13 @@ if [ -z $(git config --global pull.rebase) ]; then
     git config --global pull.rebase false
 fi
 
+alias_url=https://raw.githubusercontent.com/pacroy/bash-init/master/alias.sh
 if [ -f ~/alias.sh ]; then
     echo "Updating alias..."    
-    curl -sS https://github.com/pacroy/bash-init/raw/master/alias.sh -o ~/alias.sh
+    curl -sS $alias_url -o ~/alias.sh
 else
     echo "Installing alias..."
-    curl -sS https://github.com/pacroy/bash-init/raw/master/alias.sh -o ~/alias.sh
+    curl -sS $alias_url -o ~/alias.sh
     echo -en "\nsource ~/alias.sh\n" >> ~/.bashrc
 fi
 

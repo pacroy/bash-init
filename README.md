@@ -9,5 +9,5 @@
 ## Installation
 
 ```Shell
-curl -sS https://github.com/pacroy/bash-init/raw/master/init.sh | bash - && source ~/alias.sh
+curl -sS https://raw.githubusercontent.com/pacroy/bash-init/master/init.sh | bash - && source ~/alias.sh
 ```
