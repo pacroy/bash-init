@@ -28,14 +28,14 @@ if [ ! -e ~/bin ]; then mkdir ~/bin; fi
 if [ ! -d ~/.ssh ] || [ ! -e ~/.ssh/id_rsa ] || [ ! -e ~/.ssh/id_rsa.pub ]; then
     echo "Generate SSH keypair..."
     if [ ! -d ~/.ssh ]; then mkdir ~/.ssh; fi
-    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ] || [ $BASH_INIT_ENV_TYPE == "wsl" ]; then hostname_prefix=$BASH_INIT_ENV_TYPE; else hostname_prefix=""; fi
+    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ] || [ $BASH_INIT_ENV_TYPE == "wsl" ]; then hostname_prefix="$BASH_INIT_ENV_TYPE."; else hostname_prefix=""; fi
     ssh-keygen -t rsa -b 4096 -C "$(whoami)@$hostname_prefix$(hostname)" -f ~/.ssh/id_rsa -N ""
 fi
 
 echo "Setting git config..."
 if [ -z $(git config --global user.name) ]; then 
-    read -p "Your git name [$(whomai)]: " git_name
-    git_name=${git_name:-$(whomai)}
+    read -p "Your git name [$(whoami)]: " git_name
+    git_name=${git_name:-$(whoami)}
     git config --global user.name "$git_name"; 
 fi
 if [ -z $(git config --global user.email) ]; then
