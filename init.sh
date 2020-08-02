@@ -33,12 +33,12 @@ if [ ! -d ~/.ssh ] || [ ! -e ~/.ssh/id_rsa ] || [ ! -e ~/.ssh/id_rsa.pub ]; then
 fi
 
 echo "Setting git config..."
-if [ -z $(git config --global user.name) ]; then 
+if [ -z "$(git config --global user.name)" ]; then 
     read -p "Your git name [$(whoami)]: " git_name
     git_name=${git_name:-$(whoami)}
     git config --global user.name "$git_name"; 
 fi
-if [ -z $(git config --global user.email) ]; then
+if [ -z "$(git config --global user.email)" ]; then
     if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]; then 
         cloudshell_email=$(az account show --query "user.name" --output tsv)
         read -p "Your git email [$cloudshell_email]: " git_email
