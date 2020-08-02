@@ -1,34 +1,75 @@
 #!/bin/bash
 set -e
 
+# Determine environment type
+if [ -z $BASH_INIT_ENV_TYPE ]; then
+    if [[ $AZURE_HTTP_USER_AGENT =~ cloud-shell.* ]]; then
+        BASH_INIT_ENV_TYPE="cloudshell"
+    else if [ ! -z ${WSLENV2+x} ]; then
+        BASH_INIT_ENV_TYPE="wsl"
+    else
+        BASH_INIT_ENV_TYPE="generic"
+    fi
+fi
+echo "Initializing for $BASH_INIT_ENV_TYPE..."
+
 echo "Setting up directories..."
-if [ ! -d ~/dev ]; then mkdir ~/dev; fi
-if [ ! -d ~/bin ]; then mkdir ~/bin; fi
+if [ ! -a ~/dev ]; then 
+    case $BASH_INIT_ENV_TYPE in
+        wsl)
+            read -p "Input your dev path [/mnt/c/Users/$(whoami)/dev]:" dev_path
+            dev_path=${dev_path:-"/mnt/c/Users/$(whoami)/dev"}
+            ls -s $dev_path ~/dev
+            ;;
+        *)
+            mkdir ~/dev
+            ;;
+    esac
+fi
+if [ ! -a ~/bin ]; then mkdir ~/bin; fi
 
 if [ ! -d ~/.ssh ] || [ ! -e ~/.ssh/id_rsa ] || [ ! -e ~/.ssh/id_rsa.pub ]; then
     echo "Generate SSH keypair..."
     if [ ! -d ~/.ssh ]; then mkdir ~/.ssh; fi
-    ssh-keygen -t rsa -b 4096 -C "$(whoami)@cloudshell.$(hostname)" -f ~/.ssh/id_rsa -N ""
+    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ] || [ $BASH_INIT_ENV_TYPE == "wsl" ]; then hostname_prefix=$BASH_INIT_ENV_TYPE; else hostname_prefix=""; fi
+    ssh-keygen -t rsa -b 4096 -C "$(whoami)@$hostname_prefix$(hostname)" -f ~/.ssh/id_rsa -N ""
 fi
-chmod 600 ~/.ssh/id_rsa
-chmod 644 ~/.ssh/id_rsa.pub
 
 echo "Setting git config..."
-name=$(whoami)
-email=$(az account show --query "user.name" --output tsv)
-git config --global user.email $email
-git config --global user.name $name
-git config --global push.default simple
-git config --global pull.rebase false
-
-if [ -z $PACROY_ALIAS ]; then
-    echo "Installing alias..."
-    curl -sS https://raw.githubusercontent.com/pacroy/bash-alias/master/install_alias.sh | bash -
-else
-    echo "Updating alias..."
-    bash ~/alias.sh update_alias
+if [ -z $(git config --global user.name) ]; then 
+    read -p "Your git name [$(whomai)]: " $git_name
+    git_name=${git_name:-$(whomai)}
+    git config --global user.name $git_name; 
+fi
+if [ -z $(git config --global user.email) ]; then
+    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]l then 
+        cloudshell_email=$(az account show --query "user.name" --output tsv); 
+        read -p "Your git email [$cloudshell_email]: " $git_email
+        git_email=${git_email:-$cloudshell_email}
+    else
+        while [ -z $git_email ]; do read -p "Your git email: " $git_email; done
+    fi
+    git config --global user.email $git_email
+fi
+if [ -z $(git config --global push.default) ]; then
+    git config --global push.default simple
+fi
+if [ -z $(git config --global pull.rebase) ]; then
+    git config --global pull.rebase false
 fi
 
+if [ -f ~/alias.sh ]; then
+    echo "Updating alias..."    
+    curl -sS https://github.com/pacroy/bash-init/raw/master/alias.sh -o ~/alias.sh
+else
+    echo "Installing alias..."
+    curl -sS https://github.com/pacroy/bash-init/raw/master/alias.sh -o ~/alias.sh
+    echo -en "\nsource ~/alias.sh\n" >> ~/.bashrc
+fi
+
+echo "Initialization completed"
+
+echo
 echo "===== Git configurations ====="
 git --version
 git config --global --list

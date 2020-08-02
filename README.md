@@ -1,7 +1,13 @@
-# Azure Cloud Shell Initialization Script
+# Bash Initialization Script
+
+## Supported Environments
+
+* Azure Cloud Shell
+* Windows Subsystem for Linux (WSL)
+* Generic Bash
 
 ## Installation
 
 ```Shell
-curl -sS https://raw.githubusercontent.com/pacroy/cloudshell-init/master/init.sh | bash -
+curl -sS https://github.com/pacroy/bash-init/raw/master/init.sh | bash - && source ~/alias.sh
 ```
