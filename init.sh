@@ -48,10 +48,10 @@ if [ -z "$(git config --global user.email)" ]; then
     fi
     git config --global user.email $git_email
 fi
-if [ -z $(git config --global push.default) ]; then
+if [ -z "$(git config --global push.default)" ]; then
     git config --global push.default simple
 fi
-if [ -z $(git config --global pull.rebase) ]; then
+if [ -z "$(git config --global pull.rebase)" ]; then
     git config --global pull.rebase false
 fi
 
