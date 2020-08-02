@@ -36,7 +36,7 @@ echo "Setting git config..."
 if [ -z "$(git config --global user.name)" ]; then 
     read -p "Your git name [$(whoami)]: " git_name
     git_name=${git_name:-$(whoami)}
-    git config --global user.name "$git_name"; 
+    git config --global user.name "$git_name"
 fi
 if [ -z "$(git config --global user.email)" ]; then
     if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]; then 
