@@ -42,8 +42,8 @@ if [ -z $(git config --global user.name) ]; then
     git config --global user.name $git_name; 
 fi
 if [ -z $(git config --global user.email) ]; then
-    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]l then 
-        cloudshell_email=$(az account show --query "user.name" --output tsv); 
+    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]; then 
+        cloudshell_email=$(az account show --query "user.name" --output tsv)
         read -p "Your git email [$cloudshell_email]: " $git_email
         git_email=${git_email:-$cloudshell_email}
     else
