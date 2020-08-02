@@ -44,7 +44,7 @@ if [ -z $(git config --global user.email) ]; then
         read -p "Your git email [$cloudshell_email]: " git_email
         git_email=${git_email:-$cloudshell_email}
     else
-        while [ -z $git_email ]; do read -p "Your git email: " git_email; done
+        while [ -z $git_email ]; do read -p "Your git email: " git_email; done;
     fi
     git config --global user.email $git_email
 fi
