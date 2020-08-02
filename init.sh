@@ -34,17 +34,17 @@ fi
 
 echo "Setting git config..."
 if [ -z "$(git config --global user.name)" ]; then 
-    read -p "Your git name [$(whoami)]: " git_name <&1
+    read -p "Your git name [$(whoami)]: " git_name </dev/tty
     git_name=${git_name:-$(whoami)}
     git config --global user.name "$git_name"
 fi
 if [ -z "$(git config --global user.email)" ]; then
     if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]; then 
         cloudshell_email=$(az account show --query "user.name" --output tsv)
-        read -p "Your git email [$cloudshell_email]: " git_email <&1
+        read -p "Your git email [$cloudshell_email]: " git_email </dev/tty
         git_email=${git_email:-$cloudshell_email}
     else
-        while [ -z "$git_email" ]; do read -p "Your git email: " git_email <&1; done
+        while [ -z "$git_email" ]; do read -p "Your git email: " git_email </dev/tty; done
     fi
     git config --global user.email $git_email
 fi
