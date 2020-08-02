@@ -2,10 +2,10 @@
 set -e
 
 # Determine environment type
-if [ -z $BASH_INIT_ENV_TYPE ]; then
+if [ -z "$BASH_INIT_ENV_TYPE" ]; then
     if [[ $AZURE_HTTP_USER_AGENT =~ cloud-shell.* ]]; then
         BASH_INIT_ENV_TYPE="cloudshell"
-    elif [ ! -z ${WSLENV2+x} ]; then
+    elif [ ! -z ${WSLENV+x} ]; then
         BASH_INIT_ENV_TYPE="wsl"
     else
         BASH_INIT_ENV_TYPE="generic"
@@ -34,17 +34,17 @@ fi
 
 echo "Setting git config..."
 if [ -z "$(git config --global user.name)" ]; then 
-    read -p "Your git name [$(whoami)]: " git_name
+    read -p "Your git name [$(whoami)]: " git_name <&1
     git_name=${git_name:-$(whoami)}
     git config --global user.name "$git_name"
 fi
 if [ -z "$(git config --global user.email)" ]; then
     if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]; then 
         cloudshell_email=$(az account show --query "user.name" --output tsv)
-        read -p "Your git email [$cloudshell_email]: " git_email
+        read -p "Your git email [$cloudshell_email]: " git_email <&1
         git_email=${git_email:-$cloudshell_email}
     else
-        while [ -z $git_email ]; do read -p "Your git email: " git_email; done;
+        while [ -z "$git_email" ]; do read -p "Your git email: " git_email <&1; done
     fi
     git config --global user.email $git_email
 fi
