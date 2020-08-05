@@ -28,8 +28,14 @@ if [ ! -e ~/bin ]; then mkdir ~/bin; fi
 if [ ! -d ~/.ssh ] || [ ! -e ~/.ssh/id_rsa ] || [ ! -e ~/.ssh/id_rsa.pub ]; then
     echo "Generate SSH keypair..."
     if [ ! -d ~/.ssh ]; then mkdir ~/.ssh; fi
-    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ] || [ $BASH_INIT_ENV_TYPE == "wsl" ]; then hostname_prefix="$BASH_INIT_ENV_TYPE."; else hostname_prefix=""; fi
-    ssh-keygen -t rsa -b 4096 -C "$(whoami)@$hostname_prefix$(hostname)" -f ~/.ssh/id_rsa -N ""
+    if [ $BASH_INIT_ENV_TYPE == "cloudshell" ]; then 
+        hostid="cloudshell.$(az account show --query "tenantId" --output tsv)"
+    elif [ $BASH_INIT_ENV_TYPE == "wsl" ]; then 
+        hostid="wsl.$(hostname)"
+    else 
+        hostid="$(hostname)"
+    fi
+    ssh-keygen -t rsa -b 4096 -C "$(whoami)@$hostid" -f ~/.ssh/id_rsa -N ""
 fi
 
 echo "Setting git config..."
