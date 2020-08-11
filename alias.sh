@@ -13,8 +13,8 @@ kcstatus() { kc rollout status deploy $1; }
 # Terraform
 alias tf='terraform'
 
-# Git Scan
-gitscan() { 
+# Git
+gitscan() {
     for d in */
     do
         echo -e "[$d]"
@@ -22,5 +22,7 @@ gitscan() {
         git status
         cd ..
         echo ""
-    done 
+    done
 }
+alias gitlog='git log --oneline --decorate'
+alias gittag='git tag -n1'
