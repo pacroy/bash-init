@@ -24,7 +24,7 @@ gitscan() {
         echo ""
     done
 }
-alias gitlog='git log --oneline --decorate'
+alias gitlog='git log --oneline --decorate --all'
 alias gittag='git tag -n1'
 alias gitst='git status --ignored'
 alias gitbr='git branch -vv'
