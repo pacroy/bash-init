@@ -26,5 +26,5 @@ gitscan() {
 }
 alias gitlog='git log --oneline --decorate'
 alias gittag='git tag -n1'
-alias gitstatus='git status --ignored'
-alias gitbranch='git branch -vv'
+alias gitst='git status --ignored'
+alias gitbr='git branch -vv'
