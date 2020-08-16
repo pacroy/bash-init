@@ -18,7 +18,7 @@ if [ ! -e ~/dev ]; then
     if [ $BASH_INIT_ENV_TYPE == "wsl" ]; then
         read -p "Input your dev path [/mnt/c/Users/$(whoami)/dev]:" dev_path
         dev_path=${dev_path:-"/mnt/c/Users/$(whoami)/dev"}
-        ls -s $dev_path ~/dev
+        ln -s $dev_path ~/dev
     else
         mkdir ~/dev
     fi
