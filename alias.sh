@@ -30,6 +30,7 @@ alias gitst='git status --ignored'
 alias gitbr='git branch -vv'
 alias gitc="git commit -am $1"
 alias gitp="git push && git push --tags"
+alias gitd="git diff"
 
 # Alias
 alias update-alias='curl -sS https://raw.githubusercontent.com/pacroy/bash-init/master/init.sh | bash - && source ~/alias.sh'
