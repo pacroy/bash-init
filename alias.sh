@@ -7,7 +7,7 @@ azaks() { az aks get-credentials --resource-group $1 --name $2; }
 alias kc='kubectl'
 alias kclist='kc config get-contexts'
 alias kcuse='kc config use-context'
-kcsetns() { context=$(kc config current-context); kc config set-context $context --namespace $1; }
+kcsetns() { kc config set-context $(kc config current-context) --namespace $1; }
 kcstatus() { kc rollout status deploy $1; }
 
 # Terraform
