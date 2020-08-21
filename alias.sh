@@ -28,11 +28,11 @@ alias gitl='git log --oneline --decorate --all'
 alias gitt='git tag -n1'
 alias gits='git status --ignored'
 alias gitb='git branch -vv'
-gitc() { git commit -am $1; }
+gitc() { git commit -am "$1"; }
 alias gitp='git push && git push --tags'
 alias gitd='git diff'
 alias gita='git add .'
-gitz() { gita && git commit -m $1 && gitp; }
+gitz() { gita && git commit -m "$1" && gitp; }
 
 # Alias
 alias update-alias='curl -sS https://raw.githubusercontent.com/pacroy/bash-init/master/init.sh | bash - && source ~/alias.sh'
