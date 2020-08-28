@@ -47,4 +47,4 @@ gitz() {
 }
 
 # Alias
-alias update-alias='curl -sS https://raw.githubusercontent.com/pacroy/bash-init/master/init.sh | bash - && source ~/alias.sh'
+alias update-alias='curl -sS https://raw.githubusercontent.com/pacroy/bash-init/master/alias.sh -o ~/alias.sh && source ~/alias.sh'
