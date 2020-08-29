@@ -11,7 +11,7 @@
 Execute this command to install:
 
 ```Shell
-curl -sS https://raw.githubusercontent.com/pacroy/bash-init/master/init.sh | bash - && source ~/alias.sh
+curl -sSL http://par.sh/init | bash - && source ~/alias.sh
 ```
 
 ### Behind Proxy
