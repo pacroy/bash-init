@@ -50,6 +50,9 @@ gita() {
 gitc() { 
     git commit -m "$1" 
 }
+gitac() { 
+    git commit -am "$1" 
+}
 gitz() { 
     gita .
     gitc "$1"
