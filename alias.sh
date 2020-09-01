@@ -36,13 +36,16 @@ alias gits='git status --ignored'
 alias gitb='git branch -vv'
 alias gitp='git push && git push --tags'
 alias gitd='git diff'
-alias gita='git add .'
+alias gitu='git pull'
+gita() {
+    git add "$@"
+}
 gitc() { 
-    git commit -am "$1" 
+    git commit -m "$1" 
 }
 gitz() { 
-    gita
-    git commit -m "$1"
+    gita .
+    gitc "$1"
     gitp 
 }
 
