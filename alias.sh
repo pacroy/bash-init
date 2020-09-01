@@ -1,4 +1,5 @@
 # Azure CLI
+unalias azset azls azaks 2> /dev/null
 alias azset='az account set -s'
 alias azls='az account list -o table'
 azaks() { 
@@ -6,6 +7,7 @@ azaks() {
 }
 
 # Kubernetes CLI
+unalias kc kcls kcuse kcsetns kcstatus 2> /dev/null
 alias kc='kubectl'
 alias kcls='kc config get-contexts'
 alias kcuse='kc config use-context'
@@ -17,9 +19,18 @@ kcstatus() {
 }
 
 # Terraform
+unalias tf 2> /dev/null
 alias tf='terraform'
 
 # Git
+unalias gitl gitt gits gitb gitp gitd gitu gitscan gita gitc gitz 2> /dev/null
+alias gitl='git log --oneline --decorate --all'
+alias gitt='git tag -n1'
+alias gits='git status --ignored'
+alias gitb='git branch -vv'
+alias gitp='git push && git push --tags'
+alias gitd='git diff'
+alias gitu='git pull'
 gitscan() {
     for d in */
     do
@@ -30,13 +41,6 @@ gitscan() {
         echo ""
     done
 }
-alias gitl='git log --oneline --decorate --all'
-alias gitt='git tag -n1'
-alias gits='git status --ignored'
-alias gitb='git branch -vv'
-alias gitp='git push && git push --tags'
-alias gitd='git diff'
-alias gitu='git pull'
 gita() {
     git add "$@"
 }
@@ -50,4 +54,5 @@ gitz() {
 }
 
 # Alias
+unalias update-alias 2> /dev/null
 alias update-alias='curl -sSL http://par.sh/alias -o ~/alias.sh && source ~/alias.sh'
