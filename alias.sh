@@ -1,5 +1,6 @@
 # Azure CLI
-unalias azset azls azaks 2> /dev/null
+unalias azset azls
+unset -f azaks
 alias azset='az account set -s'
 alias azls='az account list -o table'
 azaks() { 
@@ -7,7 +8,8 @@ azaks() {
 }
 
 # Kubernetes CLI
-unalias kc kcls kcuse kcsetns kcstatus 2> /dev/null
+unalias kc kcls kcuse
+unset -f kcsetns kcstatus
 alias kc='kubectl'
 alias kcls='kc config get-contexts'
 alias kcuse='kc config use-context'
@@ -23,7 +25,8 @@ unalias tf 2> /dev/null
 alias tf='terraform'
 
 # Git
-unalias gitl gitt gits gitb gitp gitd gitu gitscan gita gitc gitz 2> /dev/null
+unalias gitl gitt gits gitb gitp gitd gitu
+unset -f gitscan gita gitc gitz
 alias gitl='git log --oneline --decorate --all'
 alias gitt='git tag -n1'
 alias gits='git status --ignored'
