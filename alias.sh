@@ -20,6 +20,11 @@ kcstatus() {
     kc rollout status deploy $1
 }
 
+# OpenShift CLI
+unalias ocls ocuse
+alias ocls='oc config get-contexts'
+alias ocuse='oc config use-context'
+
 # Terraform
 unalias tf 2> /dev/null 2> /dev/null
 alias tf='terraform'
