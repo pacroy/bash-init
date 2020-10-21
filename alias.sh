@@ -21,7 +21,7 @@ kcstatus() {
 }
 
 # OpenShift CLI
-unalias ocls ocuse
+unalias ocls ocuse 2> /dev/null
 alias ocls='oc config get-contexts'
 alias ocuse='oc config use-context'
 
