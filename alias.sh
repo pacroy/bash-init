@@ -30,13 +30,14 @@ unalias tf 2> /dev/null 2> /dev/null
 alias tf='terraform'
 
 # Git
-unalias gitl gitt gits gitb gitp gitd gitu 2> /dev/null
+unalias gitl gitt gits gitb gitp gitpt gitd gitu 2> /dev/null
 unset -f gitscan gita gitc gitz
 alias gitl='git log --oneline --decorate --all'
 alias gitt='git tag -n1'
 alias gits='git status --ignored'
 alias gitb='git branch -vv'
 alias gitp='git push --follow-tags'
+alias gitpt='git push --tags --force'
 alias gitd='git diff'
 alias gitu='git pull'
 gitscan() {
