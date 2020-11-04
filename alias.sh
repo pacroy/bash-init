@@ -66,4 +66,4 @@ gitz() {
 
 # Alias
 unalias update-alias 2> /dev/null
-alias update-alias='curl -sSL https://par.sh/alias -o ~/alias.sh -x $PROXY && source ~/alias.sh'
+alias update-alias='curl -sSL https://par.sh/alias -o ~/alias.sh -x $proxy && source ~/alias.sh'
