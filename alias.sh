@@ -36,7 +36,7 @@ alias gitl='git log --oneline --decorate --all'
 alias gitt='git tag -n1'
 alias gits='git status --ignored'
 alias gitb='git branch -vv'
-alias gitp='git push --all && git push --tags'
+alias gitp='git push --follow-tags'
 alias gitd='git diff'
 alias gitu='git pull'
 gitscan() {
