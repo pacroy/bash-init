@@ -25,9 +25,10 @@ unalias ocls ocuse 2> /dev/null
 alias ocls='oc config get-contexts'
 alias ocuse='oc config use-context'
 
-# Terraform
-unalias tf 2> /dev/null 2> /dev/null
+# Terraform & Terragrunt
+unalias tf tg 2> /dev/null
 alias tf='terraform'
+alias tg='terragrunt'
 
 # Git
 unalias gitl gitt gits gitb gitp gitpt gitd gitu 2> /dev/null
