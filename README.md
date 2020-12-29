@@ -1,3 +1,5 @@
+_**This project has been migrated to https://github.com/pacroy/sh-init**_
+
 # Bash Initialization Script
 
 ## Supported Environments
